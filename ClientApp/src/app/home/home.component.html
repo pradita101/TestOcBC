@@ -1,0 +1,55 @@
+<div class="block mt-4">
+  <h1 class="title">Add New Customer</h1>
+</div>
+<div class="columns">
+  <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+    <form method="POST" [formGroup]="customerGroup" class="box" >
+      <div class="field">
+        <label class="label">Customer Name</label>
+        <div class="control has-icons-left">
+          <input type="text" placeholder="John" name="CustomerName" formControlName="CustomerName" class="input" required>
+          <span class="icon is-small is-left">
+            <i class="fa fa-address-card"></i>
+          </span>
+        </div>
+        <span *ngIf="(f.CustomerName.touched || submit) && f.CustomerName.errors?.required"
+              class="tag is-danger is-light">First Name Is Required</span>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-success" type="submit" (click)="submitData()">
+            Submit
+          </button>
+        </div>
+        <div class="control">
+          <button type="reset" class="button">Reset</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="block">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Account Number</th>
+        <th>Customer Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="DataCustomer">
+      <tr *ngFor="let data of DataCustomer">
+        <td>{{data.customersId}}</td>
+        <td>{{data.customerName}}</td>
+        <td>          
+            <button class="button" (click)="addTransaction(data.customersId)">
+              <span class="icon is-small">
+                <i class="fa fa-edit"></i>
+              </span>
+            </button>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
